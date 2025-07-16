@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	--bg-color: #1a1a1a;
+	--sidebar-bg: #fff;
+	--sidebar-width: 60px;
+	--sidebar-collapsed-width: 60px;
+	--sidebar-expanded-width: 240px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family:
+		'Montserrat',
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		'Roboto',
+		'Oxygen',
+		'Ubuntu',
+		'Cantarell',
+		'Fira Sans',
+		'Droid Sans',
+		'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.app-layout {
+	display: flex;
+}
+
+.main-area {
+	display: flex;
+	/* margin-left: 60px; matches collapsed width */
+	padding: 1rem;
+	justify-content: center;
+	/* align-items: center; */
+	background-color: var(--bg-color);
+}
