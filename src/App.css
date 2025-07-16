@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Anta');
+
+:root {
+	--bg-color: #000000;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.app-layout {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.app-layout {
+	display: flex;
+	flex-direction: row;
+	min-height: 100vh;
+	background-color: var(--bg-color);
+}
+
+.main-area {
+	display: flex;
+	flex: 1;
+	transition: margin-left 0.3s ease; /* Adjusted for sidebar width */
+    padding: 30px;
+}
+
+.sidebar{
+    font-family: 'Anta';
+}
