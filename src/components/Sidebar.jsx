@@ -38,7 +38,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 						to={item.path}
 						className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
 						title={collapsed ? item.label : ''}
-                        onClick={(e) => { e.stopPropagation(); }} // Prevent sidebar toggle on link click
+                        onClick={(e) => { e.stopPropagation(); }} // to not collapse sidebar on click
 					>
 						<span className="nav-icon">{item.icon}</span>
 						{!collapsed && (
@@ -49,7 +49,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 			</nav>
 
 			{/* <div className="sidebar-footer"> */}
-				{/* Implement settings and logout functionality here */}
+				{/*  implemet some thing like setting or somehting similar maybe*/}
 			{/* </div> */}
 		</div>
 	);

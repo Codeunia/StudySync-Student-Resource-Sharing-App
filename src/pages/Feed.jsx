@@ -163,7 +163,7 @@ const Feed = () => {
         }
     };
 
-    // Load posts when component mounts
+    // Load posts when component.....load
     useEffect(() => {
         loadPosts();
     }, []);
@@ -177,7 +177,7 @@ const Feed = () => {
                     and shared resources.
                 </p>
 
-                {/* Error and Loading States */}
+                {/* Error and loading thing functionality */}
                 {error && (
                     <div
                         className="error-message"
@@ -199,7 +199,7 @@ const Feed = () => {
                                     fontSize: '0.9em',
                                 }}
                             >
-                                💡 Run <code>npm run json-server</code> in a
+                                Run <code>npm run json-server</code> in a
                                 separate terminal to start the JSON server.
                             </div>
                         )}
@@ -264,9 +264,6 @@ const Feed = () => {
                                         </div>
                                         <div className="author-info">
                                             <strong>{post.author.name}</strong>
-                                            {/* <p className="username">
-                                                @{post.author.username}
-                                            </p> */}
                                         </div>
                                     </div>
 
