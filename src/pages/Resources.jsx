@@ -272,9 +272,9 @@ const Resources = () => {
                                         </div>
                                         <div className="author-info">
                                             <strong>{resource.author.name}</strong>
-                                            <p className="username">
+                                            {/* <p className="username">
                                                 @{resource.author.username}
-                                            </p>
+                                            </p> */}
                                         </div>
                                     </div>
 
