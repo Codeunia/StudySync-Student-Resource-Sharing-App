@@ -106,6 +106,12 @@
 	color: #fcfcfc;
 	font-size: 1.5rem;
 }
+.user-info .edit-btn:hover {
+	color: #9a29ea;
+}
+.user-info .edit-btn:focus {
+	outline: none;
+}
 .username {
 	font-family:
 		'Anta',
@@ -127,6 +133,46 @@
 		sans-serif;
 	font-weight: bold;
 	margin-bottom: 0.5rem;
+}
+
+.basic-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	width: 100%;
+	margin-top: 1rem;
+	padding: 1rem;
+	/* background: rgba(255, 255, 255, 0.7); */
+	border-radius: 8px;
+}
+.role-input {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+
+}
+.role-input select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+.role-input::after {
+	content: '▼';
+	font-size: small;
+	position: absolute;
+	right: 10px;
+	top: 60%;
+	transform: translateY(-30%);
+	outline: none;
+	border-color: purple;
+	background: rgba(255, 255, 255, 0.15);
 }
 
 .college {
@@ -265,7 +311,7 @@
 	cursor: pointer;
 	font-size: 1rem;
 }
-.create-entry button{
+.create-entry button {
 	background: rgba(128, 128, 128, 0.408);
 	color: #fcfcfc;
 	border: 1px solid #ccc;
@@ -514,7 +560,7 @@
 	/* justify-content: center; */
 	width: 100%;
 	padding: 1rem;
-	background: rgba(255, 255, 255, 0.277);
+	background: rgba(0, 0, 0, 0.484);
 	border-radius: 8px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.726);
 	color: white;
@@ -526,7 +572,7 @@
 }
 
 .post-card {
-	background: rgba(255, 255, 255, 0.05);
+	background: rgba(54, 53, 54, 0.24);
 	border-radius: 1rem;
 	padding: 1rem;
 	margin-bottom: 1.5rem;

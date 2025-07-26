@@ -629,12 +629,13 @@ const Profile = () => {
 										}}
 										className="edit-input username-input"
 									/>
+									<div className="role-input">
 									<select
 										value={role}
 										ref={roleRef}
 										onChange={e => setRole(e.target.value)}
 										onBlur={saveUserProfile} // Save when field loses focus
-										className="edit-input"
+										className="edit-input "
 										onKeyDown={e => {
 											if (e.key === 'Enter') {
 												setUsername(e.target.value);
@@ -647,6 +648,7 @@ const Profile = () => {
 											Working Professional
 										</option>
 									</select>
+									</div>
 								</>
 							) : (
 								<>
