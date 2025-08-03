@@ -217,7 +217,8 @@ const Profile = () => {
 				institution,
 				graduatingYear,
 				skills,
-				photo,
+				avatar: photo, // Use avatar field for consistency
+				photo, // Keep both for backward compatibility
 				followers,
 			};
 
@@ -437,19 +438,33 @@ const Profile = () => {
 		setEditing(!editing);
 	};
 
-	const addSkill = () => {
+	const addSkill = async () => {
 		if (skillInput.trim() && !skills.includes(skillInput.trim())) {
-			setSkills([...skills, skillInput.trim()]);
+			const newSkills = [...skills, skillInput.trim()];
+			setSkills(newSkills);
 			setSkillInput('');
-			// Save profile after adding skill
-			setTimeout(saveUserProfile, 100); // Small delay to ensure state is updated
+			// Save profile after adding skill with the new skills array
+			if (isServerRunning) {
+				try {
+					await saveUserProfile();
+				} catch (error) {
+					console.error('Failed to save skills:', error);
+				}
+			}
 		}
 	};
 
-	const removeSkill = skillToRemove => {
-		setSkills(skills.filter(s => s !== skillToRemove));
+	const removeSkill = async (skillToRemove) => {
+		const newSkills = skills.filter(s => s !== skillToRemove);
+		setSkills(newSkills);
 		// Save profile after removing skill
-		setTimeout(saveUserProfile, 100); // Small delay to ensure state is updated
+		if (isServerRunning) {
+			try {
+				await saveUserProfile();
+			} catch (error) {
+				console.error('Failed to save skills after removal:', error);
+			}
+		}
 	};
 
 	// Function to detect and render clickable links in text
@@ -517,6 +532,7 @@ const Profile = () => {
 		role,
 		institution,
 		graduatingYear,
+		skills,
 		photo,
 		isServerRunning,
 		loading,
@@ -836,15 +852,13 @@ const Profile = () => {
 											<button
 												className="edit-skill-btn"
 												onClick={() => {
-													addSkill();
-													setEditingSkills(
-														!editingSkills
-													);
+													if (skillInput.trim()) {
+														addSkill();
+													}
+													setEditingSkills(false);
 												}}
 											>
-												{editingSkills
-													? 'Save'
-													: 'Edit'}
+												Save
 											</button>
 										</div>
 										<div className="skills-list">
