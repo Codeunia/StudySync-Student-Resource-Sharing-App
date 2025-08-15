@@ -5,6 +5,8 @@ const apiRequest = async (url, options = {}) => {
   try {
     // Get user token from localStorage
     const user = JSON.parse(localStorage.getItem('user') || '{}');
+    console.log('User from localStorage:', user); // Debug log
+    
     const headers = {
       'Content-Type': 'application/json',
       ...options.headers,
@@ -13,6 +15,9 @@ const apiRequest = async (url, options = {}) => {
     // Add authorization header if token exists
     if (user.token) {
       headers.Authorization = `Bearer ${user.token}`;
+      console.log('Added Authorization header with token'); // Debug log
+    } else {
+      console.log('No token found in localStorage'); // Debug log
     }
     
     const response = await fetch(`${API_BASE_URL}${url}`, {
@@ -24,13 +29,11 @@ const apiRequest = async (url, options = {}) => {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ message: 'An unknown error occurred' }));
       
-      // If unauthorized, clear stored user data
+      // If unauthorized, clear stored user data but don't redirect immediately
       if (response.status === 401) {
+        console.log('401 Unauthorized - clearing localStorage');
         localStorage.removeItem('user');
-        // Optionally redirect to login
-        if (window.location.pathname !== '/') {
-          window.location.href = '/';
-        }
+        // Don't redirect automatically - let the component handle it
       }
       
       throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
