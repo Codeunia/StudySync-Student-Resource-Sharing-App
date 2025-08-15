@@ -101,6 +101,7 @@
     .search-filter-container {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.5rem;
     }
     
     .search-bar {
