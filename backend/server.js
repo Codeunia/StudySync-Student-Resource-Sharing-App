@@ -24,14 +24,21 @@ configurePassport(passport);
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
+  'https://study-sync-student-resource-sharing.vercel.app',
   process.env.FRONTEND_URL // Your Vercel URL
 ].filter(Boolean);
 
+console.log('Allowed CORS origins:', allowedOrigins);
+console.log('FRONTEND_URL env var:', process.env.FRONTEND_URL);
+
+// Temporary: More permissive CORS for debugging
 app.use(cors({
-  origin: allowedOrigins,
+  origin: true, // Allow all origins temporarily
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
 }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
