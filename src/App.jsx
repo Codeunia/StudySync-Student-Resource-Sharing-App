@@ -20,10 +20,18 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Skip auth check for now to avoid hanging on localhost:5000
-    // Go straight to login page
-    setLoading(false);
-    setUser(null);
+    const checkCurrentUser = async () => {
+      try {
+        const currentUser = await authAPI.getCurrentUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.log('Auth check failed:', error.message);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkCurrentUser();
   }, []);
 
   const sidebarWidth = collapsed ? 60 : 250;
