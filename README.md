@@ -33,23 +33,59 @@
 
 - **📤 Resource Sharing**: Upload and share PDFs, images, videos, and links
 - **📝 Post Creation**: Share thoughts, projects, and study updates
-- **👤 Profile Management**: Editable profiles with skills and institution info
 - **💾 Data Persistence**: All content saved with reliable backend storage
 - **🖼️ Image Preview**: Automatic preview for uploaded files and image URLs
+- **🔗 Smart Link Detection**: URLs and emails become clickable automatically
 
 </td>
 <td width="50%">
 
 ### ⚡ Interactive Features
 
-- **🔗 Smart Link Detection**: URLs and emails become clickable automatically
 - **📁 File Upload**: Support for multiple file types with drag-and-drop
 - **🔄 Real-time Updates**: Instant synchronization across sessions
+- **🛡️ Error Handling**: Graceful error messages and retry functionality
 - **📱 Responsive Design**: Optimized for all device sizes
+- **🔍 Search & Filter**: Advanced content discovery tools
 
 </td>
 </tr>
 </table>
+
+---
+
+## 🔮 Features to be Added
+
+<table>
+<tr>
+<td width="50%">
+
+### 👥 Profile & Social Features
+
+- **🎓 Education Info Collection**: Gather and display academic background, institution, and graduation details
+- **🛠️ Skills Management**: Add, edit, and showcase personal skills with proficiency levels
+- **👤 Profile Customization**: Edit profile picture, display name, and bio information
+- **🔗 Clickable User Profiles**: Browse and view other users' complete profiles
+- **📊 Profile Analytics**: Track profile views, engagement, and activity metrics
+
+</td>
+<td width="50%">
+
+### 🚀 Advanced Features
+
+- **💬 Direct Messaging**: Private communication between users
+- **🔔 Notification System**: Real-time alerts for activities and updates
+- **⭐ Rating & Reviews**: Rate and review shared resources
+- **🏷️ Advanced Tagging**: Categorize content with custom tags
+- **📈 Learning Analytics**: Track study progress and resource usage
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+  <small><em>💡 Contributors are welcome to help implement these features!</em></small>
+</div>
 
 ---
 
