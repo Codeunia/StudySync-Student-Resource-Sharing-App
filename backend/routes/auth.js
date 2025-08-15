@@ -12,11 +12,11 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    failureRedirect: 'http://localhost:3000/login-failed', // Or your frontend's login page
+    failureRedirect: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/login-failed`,
   }),
   (req, res) => {
     // On successful authentication, redirect to the frontend dashboard.
-    res.redirect('http://localhost:3000/dashboard'); // IMPORTANT: Make sure this is a route in your React app
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/dashboard`);
   }
 );
 
@@ -28,7 +28,7 @@ router.get('/logout', (req, res, next) => {
       return next(err);
     }
     // On successful logout, you can redirect or send a success message
-    res.redirect('http://localhost:3000/'); // Redirect to the frontend homepage
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/`);
   });
 });
 
