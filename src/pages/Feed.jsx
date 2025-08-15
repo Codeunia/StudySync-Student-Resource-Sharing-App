@@ -1,6 +1,6 @@
 // src/pages/Feed.jsx
 import React, { useState, useEffect, useMemo } from 'react';
-import { postsAPI } from '../utils/api';
+import { postsAPI, isAuthenticated } from '../utils/api';
 import SearchAndFilter from '../components/SearchAndFilter';
 import { FaHeart, FaRegHeart, FaRegComment, FaTrash } from 'react-icons/fa';
 
@@ -14,6 +14,14 @@ const Feed = ({ user }) => {
 
     useEffect(() => {
         const loadPosts = async () => {
+            // Check authentication before making API call
+            if (!isAuthenticated()) {
+                console.log('User not authenticated, skipping posts fetch');
+                setError('Please log in to view posts');
+                setLoading(false);
+                return;
+            }
+            
             try {
                 setLoading(true);
                 const fetchedPosts = await postsAPI.getAll();

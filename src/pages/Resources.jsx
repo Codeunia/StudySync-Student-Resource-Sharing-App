@@ -1,5 +1,6 @@
+// Backup of Resources.jsx - will replace the corrupted one
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { resourcesAPI } from '../utils/api';
+import { resourcesAPI, isAuthenticated } from '../utils/api';
 import SearchAndFilter from '../components/SearchAndFilter';
 
 // --- Placeholder Component (Unchanged) ---
@@ -30,8 +31,16 @@ const Resources = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('newest');
 
-    const loadResources = useCallback(async (pageNum) => {
-        if (pageNum > 1) {
+    const loadResources = useCallback(async (pageNum = 1) => {
+        // Check authentication before making API call
+        if (!isAuthenticated()) {
+            console.log('User not authenticated, skipping resources fetch');
+            setError('Please log in to view resources');
+            setLoading(false);
+            return;
+        }
+        
+        if (pageNum === 1) {
             setLoading(true);
         }
         try {
@@ -69,10 +78,10 @@ const Resources = () => {
             if (sortBy === 'oldest') {
                 return new Date(a.timestamp) - new Date(b.timestamp);
             }
-            return new Date(b.timestamp) - new Date(a.timestamp); // 'newest' and default
+            // Default to 'newest'
+            return new Date(b.timestamp) - new Date(a.timestamp);
         });
     }, [resources, searchTerm, sortBy]);
-
 
     const handleLoadMore = () => {
         if (!loading && page < totalPages) {

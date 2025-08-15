@@ -2,10 +2,12 @@
 export function ensureAuth(req, res, next) {
   console.log('Auth check - isAuthenticated:', req.isAuthenticated()); // Debug
   console.log('Auth check - headers:', req.headers.authorization); // Debug
+  console.log('Auth check - URL:', req.originalUrl); // Debug
+  console.log('Auth check - Method:', req.method); // Debug
   
   // Check for session-based auth first
   if (req.isAuthenticated()) {
-    console.log('Session auth successful'); // Debug
+    console.log('Session auth successful for user:', req.user.id); // Debug
     return next();
   }
   
@@ -36,19 +38,22 @@ export function ensureAuth(req, res, next) {
           return next();
         } else {
           console.log('Token expired - age:', tokenAge / (1000 * 60 * 60), 'hours'); // Debug
+          return res.status(401).json({ message: 'Token expired, please log in again' });
         }
       } else {
         console.log('Invalid token data - missing required fields:', { 
           hasId: !!userData.id, 
           hasTimestamp: !!userData.timestamp 
         }); // Debug
+        return res.status(401).json({ message: 'Invalid token format' });
       }
     } catch (error) {
       console.log('Token validation failed:', error.message);
+      return res.status(401).json({ message: 'Invalid token' });
     }
   }
   
-  console.log('Auth failed - sending 401'); // Debug
+  console.log('Auth failed - no valid authentication found'); // Debug
   // If user is not logged in, send an unauthorized error
   res.status(401).json({ message: 'Please log in to view this resource' });
 }

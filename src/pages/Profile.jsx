@@ -1,6 +1,6 @@
 // src/pages/Profile.jsx
 import React, { useState, useEffect } from 'react';
-import { postsAPI, resourcesAPI, uploadAPI } from '../utils/api';
+import { postsAPI, resourcesAPI, uploadAPI, isAuthenticated } from '../utils/api';
 import { FaHeart, FaRegHeart, FaRegComment, FaTrash } from 'react-icons/fa';
 
 const Profile = ({ user }) => {
@@ -17,6 +17,14 @@ const Profile = ({ user }) => {
 
     useEffect(() => {
         const loadUserData = async () => {
+            // Check authentication before making API calls
+            if (!isAuthenticated()) {
+                console.log('User not authenticated, skipping profile data fetch');
+                setError('Please log in to view your profile');
+                setLoading(false);
+                return;
+            }
+            
             try {
                 setLoading(true);
                 const [userPosts, userResources] = await Promise.all([

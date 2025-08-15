@@ -30,7 +30,7 @@ router.get(
     // For cross-domain authentication, we'll include user data and token in the URL
     const userData = encodeURIComponent(JSON.stringify({
       id: req.user.id,
-      name: req.user.name,
+      displayName: req.user.displayName,
       email: req.user.email,
       image: req.user.image,
       token: userToken

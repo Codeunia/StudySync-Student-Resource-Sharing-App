@@ -1,10 +1,36 @@
 // src/utils/api.js
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+// Helper function to check if user is authenticated
+const isAuthenticated = () => {
+  try {
+    const userStr = localStorage.getItem('user');
+    if (!userStr) return false;
+    
+    const user = JSON.parse(userStr);
+    if (!user || !user.token) return false;
+    
+    // Check if token is still valid (not expired)
+    const tokenData = JSON.parse(Buffer.from(user.token, 'base64').toString());
+    const tokenAge = Date.now() - tokenData.timestamp;
+    return tokenAge < 24 * 60 * 60 * 1000; // 24 hours
+  } catch (error) {
+    console.log('Error checking authentication:', error);
+    return false;
+  }
+};
+
+// Helper function to clear expired auth data
+const clearExpiredAuth = () => {
+  localStorage.removeItem('user');
+  console.log('Cleared expired authentication data');
+};
+
 const apiRequest = async (url, options = {}) => {
   try {
     // Get user token from localStorage
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const userStr = localStorage.getItem('user');
+    const user = userStr ? JSON.parse(userStr) : null;
     console.log('User from localStorage:', user); // Debug log
     
     const headers = {
@@ -12,12 +38,32 @@ const apiRequest = async (url, options = {}) => {
       ...options.headers,
     };
     
-    // Add authorization header if token exists
-    if (user.token) {
-      headers.Authorization = `Bearer ${user.token}`;
-      console.log('Added Authorization header with token'); // Debug log
+    // Add authorization header if token exists and is valid
+    if (user && user.token) {
+      // Validate token isn't expired (check if older than 24 hours)
+      try {
+        const tokenData = JSON.parse(Buffer.from(user.token, 'base64').toString());
+        const tokenAge = Date.now() - tokenData.timestamp;
+        const isTokenValid = tokenAge < 24 * 60 * 60 * 1000; // 24 hours
+        
+        if (isTokenValid) {
+          headers.Authorization = `Bearer ${user.token}`;
+          console.log('Added Authorization header with valid token'); // Debug log
+        } else {
+          console.log('Token expired, clearing localStorage'); // Debug log
+          localStorage.removeItem('user');
+          // Redirect to login if token is expired
+          window.location.href = '/';
+          return;
+        }
+      } catch (tokenError) {
+        console.log('Invalid token format, clearing localStorage'); // Debug log
+        localStorage.removeItem('user');
+        window.location.href = '/';
+        return;
+      }
     } else {
-      console.log('No token found in localStorage'); // Debug log
+      console.log('No valid token found in localStorage'); // Debug log
     }
     
     const response = await fetch(`${API_BASE_URL}${url}`, {
@@ -78,9 +124,44 @@ export const resourcesAPI = {
 
 export const uploadAPI = {
   uploadFile: (formData) => {
+    // Get user token from localStorage
+    const userStr = localStorage.getItem('user');
+    const user = userStr ? JSON.parse(userStr) : null;
+    console.log('Upload API - User from localStorage:', user); // Debug log
+    
+    const headers = {};
+    
+    // Add authorization header if token exists and is valid
+    if (user && user.token) {
+      try {
+        const tokenData = JSON.parse(Buffer.from(user.token, 'base64').toString());
+        const tokenAge = Date.now() - tokenData.timestamp;
+        const isTokenValid = tokenAge < 24 * 60 * 60 * 1000; // 24 hours
+        
+        if (isTokenValid) {
+          headers.Authorization = `Bearer ${user.token}`;
+          console.log('Upload API - Added Authorization header with valid token'); // Debug log
+        } else {
+          console.log('Upload API - Token expired, clearing localStorage'); // Debug log
+          localStorage.removeItem('user');
+          window.location.href = '/';
+          return Promise.reject(new Error('Token expired'));
+        }
+      } catch (tokenError) {
+        console.log('Upload API - Invalid token format, clearing localStorage'); // Debug log
+        localStorage.removeItem('user');
+        window.location.href = '/';
+        return Promise.reject(new Error('Invalid token'));
+      }
+    } else {
+      console.log('Upload API - No valid token found in localStorage'); // Debug log
+      return Promise.reject(new Error('No authentication token'));
+    }
+    
     return fetch(`${API_BASE_URL}/api/upload`, {
       method: 'POST',
       credentials: 'include',
+      headers,
       body: formData,
     }).then(res => {
       if (!res.ok) {
@@ -90,3 +171,6 @@ export const uploadAPI = {
     });
   }
 };
+
+// Export helper functions
+export { isAuthenticated, clearExpiredAuth };
