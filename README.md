@@ -33,7 +33,6 @@
 
 - **📤 Resource Sharing**: Upload and share PDFs, images, videos, and links
 - **📝 Post Creation**: Share thoughts, projects, and study updates
-- **👤 Profile Management**: Editable profiles with skills and institution info
 - **💾 Data Persistence**: All content saved with reliable backend storage
 - **🖼️ Image Preview**: Automatic preview for uploaded files and image URLs
 
