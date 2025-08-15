@@ -1,154 +1,294 @@
-:root{
-    --page-content-bg: linear-gradient(90deg,  #0000009c,#9929EA7e, #0000009c);
-    --page-content-text-color: #ffffff;
+:root {
+  --page-content-bg: linear-gradient(
+    90deg,
+    #0000009c,
+    #9929ea7e,
+    #0000009c
+  );
+  --page-content-text-color: #ffffff;
 }
 
 .page-content {
-    display: flex;
-    flex-direction: column;
-    background: var(--page-content-bg);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
-    max-width: 70vw;
-    margin: 0px auto;
-    width: 100%;
-    /* height: 200vh; */
-    transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  background: var(--page-content-bg);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: var(--page-content-text-color);
+  max-width: 900px; /* Increased max-width for a better feed layout */
+  margin: 20px auto;
+  width: 100%;
+  transition: all 0.3s ease;
 }
+
+.page-content h1 {
+  text-align: center;
+}
+.page-content p {
+  text-align: center;
+}
+
+/* --- NEW: Create Post Card --- */
+.create-post-card {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.64);
+}
+
+.create-post-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-post-card textarea {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  resize: vertical;
+}
+
+.create-post-card button {
+  background-color: #9929ea;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-post-card button:hover {
+  background-color: #7a20b8;
+}
+
+.create-post-card button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* --- NEW: Wrapper for the list of posts --- */
+.posts-list {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- MODIFIED: Post Card --- */
 .post-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 1rem;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    color: white;
-    backdrop-filter: blur(30px);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 70%;
-    min-height: fit-content;
-    overflow: hidden;
-    box-sizing: border-box;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.64);
-    transition: all 0.3s ease;
-}
-
-.my-posts-section {
-    margin-top: 20px;  
-    
-    flex:1;
-    color: white;
-    border:1px solid rgba(255, 255, 255, 0.1);
-}
-
-
-.my-posts-section .my-posts-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  color: white;
+  backdrop-filter: blur(30px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.64);
+  /* text-align: left; Posts should be left-aligned */
+  display: flex;
+  flex-direction: column;
 }
 
 .post-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #444;
-    padding-bottom: 0.5rem;
-}
-
-.author-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.author-info strong {
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.username {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.avatar-wrapper {
-    margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Use gap for spacing */
+  margin-bottom: 1rem;
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.post-content {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9);
-    word-wrap: break-word;
-    margin-bottom: 1rem;
+.author-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allow this to take up space */
 }
 
-.post-link {
-    color: #4A90E2;
-    text-decoration: none;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    display: inline-block;
-}
-
-.post-link:hover {
-    color: #357ABD;
-    text-decoration: underline;
-}
-
-.post-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid #444;
-}
-
-.post-interactions {
-    display: flex;
-    gap: 1rem;
-}
-
-.post-interactions button {
-    background: none;
-    border: none;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
-
-.post-interactions button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+.author-info strong {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .timestamp {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.inline-link {
-    color: #4A90E2;
-    text-decoration: underline;
+.delete-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.delete-btn:hover {
+  color: #ff4d4d;
 }
 
-.inline-link:hover {
-    color: #357ABD;
+.post-content {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  justify-content: center;
+}
+.resource-image-preview {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Optional: Add shadow for depth */
+
+}
+
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- NEW: Styles for Action Buttons --- */
+.action-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* --- NEW: Comments Section --- */
+.comments-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment p {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: left;
+}
+
+.comment-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.comment-form input {
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.comment-form button {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.comment-form button:hover {
+  background: #666;
+}
+
+/* --- NEW: Skeleton Loader Styles --- */
+.placeholder-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.64);
+}
+
+.placeholder-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.placeholder-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.placeholder-line {
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.placeholder-line.short {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }

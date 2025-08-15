@@ -1,0 +1,88 @@
+/* General body styling and font import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main container with gradient background */
+.login-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #000000, #9929ea, #000000);
+    color: white;
+}
+
+/* Login card with glassmorphism effect */
+.login-card {
+    width: 100%;
+    max-width: 28rem; /* 448px */
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(24px);
+    border-radius: 1rem; /* 16px */
+    padding: 2rem; /* 32px */
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    text-align: center;
+    transition: max-width 0.3s ease-in-out; /* Smooth transition for width change */
+}
+
+/* Header text styling */
+.login-header h1 {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* 8px */
+    letter-spacing: -0.025em;
+}
+
+.login-header p {
+    font-size: 1.125rem; /* 18px */
+    color: #d1d5db; /* gray-300 */
+    margin-bottom: 2rem; /* 32px */
+}
+
+/* Login button styling */
+.login-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0.75rem; /* 12px */
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 600;
+    padding: 1rem 1.5rem; /* 16px 24px */
+    border-radius: 0.75rem; /* 12px */
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: scale(1.05);
+}
+
+.login-button .google-icon {
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+}
+
+/* Responsive adjustments for larger screens (laptops/desktops) */
+@media (min-width: 768px) {
+    .login-card {
+        max-width: 46rem; /* 576px - Increased width for larger screens */
+    }
+
+    .login-header h1 {
+        font-size: 3rem; /* 48px */
+    }
+}
