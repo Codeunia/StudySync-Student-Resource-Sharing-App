@@ -22,8 +22,21 @@ function App() {
   useEffect(() => {
     const checkCurrentUser = async () => {
       try {
-        const currentUser = await authAPI.getCurrentUser();
-        setUser(currentUser);
+        // First, check if user data is in URL (from OAuth callback)
+        const urlParams = new URLSearchParams(window.location.search);
+        const userParam = urlParams.get('user');
+        
+        if (userParam) {
+          // User data from OAuth callback
+          const userData = JSON.parse(decodeURIComponent(userParam));
+          setUser(userData);
+          // Clean up URL
+          window.history.replaceState({}, document.title, window.location.pathname);
+        } else {
+          // Try to get user from session
+          const currentUser = await authAPI.getCurrentUser();
+          setUser(currentUser);
+        }
       } catch (error) {
         console.log('Auth check failed:', error.message);
         setUser(null);
