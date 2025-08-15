@@ -15,8 +15,13 @@ router.get(
     failureRedirect: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/login-failed`,
   }),
   (req, res) => {
+    // Debug: Check what URL we're redirecting to
+    const redirectUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/dashboard`;
+    console.log('Redirecting to:', redirectUrl);
+    console.log('FRONTEND_URL env var:', process.env.FRONTEND_URL);
+    
     // On successful authentication, redirect to the frontend dashboard.
-    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/dashboard`);
+    res.redirect(redirectUrl);
   }
 );
 
