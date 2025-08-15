@@ -18,7 +18,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   color: var(--page-content-text-color);
   max-width: 1000px; /* Increased max-width for a better feed layout */
-  margin: 20px auto;
+  /* margin: 20px auto; */
   width: 100%;
   transition: all 0.3s ease;
 }
@@ -28,7 +28,15 @@
     margin: 10px auto; /* Reduced margin for smaller screens */
   }
 }
-
+@media (max-width: 480px) {
+  .page-content {
+    padding: 20px 15px;
+    margin: 0px; /* Reduced margin for smaller screens */
+  }
+  .main-area{
+    margin:0px;
+  }
+}
 .page-content h1 {
   text-align: center;
 }

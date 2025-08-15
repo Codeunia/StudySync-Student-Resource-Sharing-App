@@ -2,146 +2,146 @@
 /* Bottom Navigation for Mobile Devices */
 
 .bottom-navigation {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(160deg, #9929ea, #000000cc);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  color: white;
-  border-radius: 20px 20px 0 0;
-  z-index: 1000;
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
-  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
-  display: none; /* Hidden by default, shown on mobile */
-  border-top: 2px solid rgba(153, 41, 234, 0.3);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(160deg, #9929ea, #000000cc);
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+	color: white;
+	border-radius: 20px 20px 0 0;
+	z-index: 1000;
+	box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+	padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+	display: none; /* Hidden by default, shown on mobile */
+	border-top: 2px solid rgba(153, 41, 234, 0.3);
 }
 
 .bottom-nav-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 20px;
-  min-height: 60px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 0 20px;
+	min-height: 60px;
 }
 
 .bottom-nav-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: #e0e0e0;
-  padding: 8px 12px;
-  border-radius: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 60px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-decoration: none;
+	color: #e0e0e0;
+	padding: 8px 12px;
+	border-radius: 12px;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	min-width: 60px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .bottom-nav-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	transform: translateY(-2px);
 }
 
 .bottom-nav-link.active {
-  background: linear-gradient(45deg, #9929ea, rgba(255, 255, 255, 0.15));
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(153, 41, 234, 0.4);
-  transform: translateY(-1px);
+	background: linear-gradient(45deg, #9929ea, rgba(255, 255, 255, 0.15));
+	color: #fff;
+	box-shadow: 0 4px 15px rgba(153, 41, 234, 0.4);
+	transform: translateY(-1px);
 }
 
 .bottom-nav-icon {
-  font-size: 1.5rem;
-  margin-bottom: 4px;
-  transition: transform 0.3s ease;
+	font-size: 1.5rem;
+	margin-bottom: 4px;
+	transition: transform 0.3s ease;
 }
 
 .bottom-nav-link:hover .bottom-nav-icon {
-  transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .bottom-nav-text {
-  font-size: 0.75rem;
-  font-weight: 500;
-  white-space: nowrap;
+	font-size: 0.75rem;
+	font-weight: 500;
+	white-space: nowrap;
 }
 
 .logout-btn {
-  background: none !important;
-  border: none !important;
+	background: none !important;
+	border: none !important;
 }
 
 .bottom-user-profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 8px 20px 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	margin-top: 8px;
 }
 
 .bottom-user-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 .bottom-user-name {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #fff;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: #fff;
 }
 
 /* Mobile and Tablet breakpoints */
 @media (max-width: 1024px) and (min-width: 769px) {
-  /* Tablet landscape - still show sidebar but make it more compact */
-  .bottom-navigation {
-    display: none;
-  }
+	/* Tablet landscape - still show sidebar but make it more compact */
+	.bottom-navigation {
+		display: none;
+	}
 }
 
 @media (max-width: 768px) {
-  .bottom-navigation {
-    display: block;
-  }
+	.bottom-navigation {
+		display: block;
+	}
 }
 
 @media (max-width: 480px) {
-  .bottom-nav-container {
-    padding: 0 10px;
-  }
-  
-  .bottom-nav-link {
-    min-width: 50px;
-    padding: 6px 8px;
-  }
-  
-  .bottom-nav-icon {
-    font-size: 1.3rem;
-  }
-  
-  .bottom-nav-text {
-    font-size: 0.7rem;
-  }
-  
-  .bottom-user-profile {
-    padding: 6px 20px 0;
-  }
-  
-  .bottom-user-avatar {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .bottom-user-name {
-    font-size: 0.75rem;
-  }
+	.bottom-nav-container {
+		padding: 0 10px;
+	}
+
+	.bottom-nav-link {
+		min-width: 50px;
+		padding: 6px 8px;
+	}
+
+	.bottom-nav-icon {
+		font-size: 1.3rem;
+	}
+
+	.bottom-nav-text {
+		font-size: 0.7rem;
+	}
+
+	.bottom-user-profile {
+		padding: 6px 20px 0;
+	}
+
+	.bottom-user-avatar {
+		width: 20px;
+		height: 20px;
+	}
+
+	.bottom-user-name {
+		font-size: 0.75rem;
+	}
 }

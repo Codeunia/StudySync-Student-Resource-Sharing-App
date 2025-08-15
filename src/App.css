@@ -9,7 +9,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-    font-family: 'Montserrat', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 .app-layout {
 	display: flex;
@@ -28,25 +28,26 @@
 	display: flex;
 	flex: 1;
 	transition: margin-left 0.3s ease; /* Adjusted for sidebar width */
-    padding: 30px;
+	padding: 30px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .main-area {
-        padding: 20px 15px;
-        margin-left: 0 !important;
-        margin-bottom: 120px; /* Space for bottom navigation */
-    }
+	.main-area {
+		padding: 20px 15px;
+		margin-left: 0 !important;
+		margin-bottom: 120px;
+	}
 }
 
 @media (max-width: 480px) {
-    .main-area {
-        padding: 15px 10px;
-        margin-bottom: 130px; /* Slightly more space on very small screens */
-    }
+	.main-area {
+		/* padding: 15px 10px; */
+		padding: 0px;
+		margin-bottom: 130px;
+	}
 }
 
-.sidebar{
-    font-family: 'Anta';
+.sidebar {
+	font-family: 'Anta';
 }
