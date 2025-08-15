@@ -13,4 +13,12 @@ export default defineConfig({
 		port: 3000,
 		open: true,
 	},
+	build: {
+		outDir: 'dist',
+		sourcemap: false,
+		// Increase chunk size warning limit
+		chunkSizeWarningLimit: 1000,
+	},
+	// Define environment variables prefix
+	envPrefix: 'VITE_',
 });
