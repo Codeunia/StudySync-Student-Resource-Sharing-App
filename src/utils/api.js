@@ -10,8 +10,8 @@ const isAuthenticated = () => {
     const user = JSON.parse(userStr);
     if (!user || !user.token) return false;
     
-    // Check if token is still valid (not expired)
-    const tokenData = JSON.parse(Buffer.from(user.token, 'base64').toString());
+    // Check if token is still valid (not expired) - using browser-compatible base64 decoding
+    const tokenData = JSON.parse(atob(user.token));
     const tokenAge = Date.now() - tokenData.timestamp;
     return tokenAge < 24 * 60 * 60 * 1000; // 24 hours
   } catch (error) {
@@ -40,9 +40,9 @@ const apiRequest = async (url, options = {}) => {
     
     // Add authorization header if token exists and is valid
     if (user && user.token) {
-      // Validate token isn't expired (check if older than 24 hours)
+      // Validate token isn't expired (check if older than 24 hours) - using browser-compatible base64 decoding
       try {
-        const tokenData = JSON.parse(Buffer.from(user.token, 'base64').toString());
+        const tokenData = JSON.parse(atob(user.token));
         const tokenAge = Date.now() - tokenData.timestamp;
         const isTokenValid = tokenAge < 24 * 60 * 60 * 1000; // 24 hours
         
@@ -134,7 +134,7 @@ export const uploadAPI = {
     // Add authorization header if token exists and is valid
     if (user && user.token) {
       try {
-        const tokenData = JSON.parse(Buffer.from(user.token, 'base64').toString());
+        const tokenData = JSON.parse(atob(user.token));
         const tokenAge = Date.now() - tokenData.timestamp;
         const isTokenValid = tokenAge < 24 * 60 * 60 * 1000; // 24 hours
         
