@@ -10,6 +10,15 @@
 <div align="center">
   <h3>🎯 A centralized platform for students to share and discover study resources</h3>
   <p>StudySync is a responsive web application that enables students to find, explore, and share valuable study materials including PDFs, notes, videos, and helpful links.</p>
+  
+  <h3>🌐 Live Demo</h3>
+  <a href="https://study-sync-student-resource-sharing.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge&logo=vercel" alt="Live Demo" />
+  </a>
+  <br>
+  <a href="https://study-sync-student-resource-sharing.vercel.app" target="_blank">
+    🚀 https://study-sync-student-resource-sharing.vercel.app
+  </a>
 </div>
 
 ---
