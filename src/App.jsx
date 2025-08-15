@@ -30,15 +30,26 @@ function App() {
           // User data from OAuth callback
           const userData = JSON.parse(decodeURIComponent(userParam));
           setUser(userData);
+          // Store user data in localStorage
+          localStorage.setItem('user', JSON.stringify(userData));
           // Clean up URL
           window.history.replaceState({}, document.title, window.location.pathname);
         } else {
-          // Try to get user from session
-          const currentUser = await authAPI.getCurrentUser();
-          setUser(currentUser);
+          // Try to get user from localStorage first
+          const storedUser = localStorage.getItem('user');
+          if (storedUser) {
+            setUser(JSON.parse(storedUser));
+          } else {
+            // Try to get user from session
+            const currentUser = await authAPI.getCurrentUser();
+            setUser(currentUser);
+            localStorage.setItem('user', JSON.stringify(currentUser));
+          }
         }
       } catch (error) {
         console.log('Auth check failed:', error.message);
+        // Clear stored user on auth failure
+        localStorage.removeItem('user');
         setUser(null);
       } finally {
         setLoading(false);

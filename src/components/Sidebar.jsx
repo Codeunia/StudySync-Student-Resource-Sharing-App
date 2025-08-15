@@ -14,6 +14,13 @@ import { IoLogOutOutline } from 'react-icons/io5'; // <= ADD LOGOUT ICON
 const Sidebar = ({ user, collapsed, setCollapsed }) => {
   const location = useLocation();
 
+  const handleLogout = () => {
+    // Clear user data from localStorage
+    localStorage.removeItem('user');
+    // Reload the page to reset the app state
+    window.location.href = '/';
+  };
+
   const navItems = [
     { label: 'Feed', path: '/', icon: <IoHomeOutline /> },
     { label: 'Resources', path: '/resources', icon: <GrResources /> },
@@ -46,17 +53,18 @@ const Sidebar = ({ user, collapsed, setCollapsed }) => {
 
       {/* --- ADD THIS USER PROFILE & LOGOUT SECTION --- */}
       <div className="sidebar-footer">
-        {/* The logout button is a direct link to our backend logout route */}
-        <a
-          href="http://localhost:5000/auth/logout"
-          className="nav-link"
+        {/* Updated logout button to handle token-based auth */}
+        <button
+          onClick={handleLogout}
+          className="nav-link logout-btn"
           title={collapsed ? 'Logout' : ''}
+          style={{ border: 'none', background: 'none', cursor: 'pointer', width: '100%', textAlign: 'left' }}
         >
           <span className="nav-icon">
             <IoLogOutOutline />
           </span>
           {!collapsed && <span className="nav-text">Logout</span>}
-        </a>
+        </button>
 
         {/* Display the logged-in user's information */}
         <div className="user-profile-section">

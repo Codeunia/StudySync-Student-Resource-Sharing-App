@@ -15,23 +15,28 @@ router.get(
     failureRedirect: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/login-failed`,
   }),
   (req, res) => {
-    // Debug: Check what URL we're redirecting to
     const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    console.log('User authenticated:', req.user);
-    console.log('FRONTEND_URL env var:', process.env.FRONTEND_URL);
     
-    // For cross-domain authentication, we'll include user data in the URL
-    // This is a temporary solution - in production you'd use JWT tokens
+    // Create a simple token (in production, use proper JWT)
+    const userToken = Buffer.from(JSON.stringify({
+      id: req.user.id,
+      email: req.user.email,
+      timestamp: Date.now()
+    })).toString('base64');
+    
+    // Store user in session for server-side use
+    req.session.userId = req.user.id;
+    
+    // For cross-domain authentication, we'll include user data and token in the URL
     const userData = encodeURIComponent(JSON.stringify({
       id: req.user.id,
       name: req.user.name,
       email: req.user.email,
-      image: req.user.image
+      image: req.user.image,
+      token: userToken
     }));
     
     const redirectUrl = `${baseUrl}/dashboard?user=${userData}`;
-    console.log('Redirecting to:', redirectUrl);
-    
     res.redirect(redirectUrl);
   }
 );

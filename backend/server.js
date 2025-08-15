@@ -28,9 +28,6 @@ const allowedOrigins = [
   process.env.FRONTEND_URL // Your Vercel URL
 ].filter(Boolean);
 
-console.log('Allowed CORS origins:', allowedOrigins);
-console.log('FRONTEND_URL env var:', process.env.FRONTEND_URL);
-
 // Temporary: More permissive CORS for debugging
 app.use(cors({
   origin: true, // Allow all origins temporarily

@@ -3,17 +3,36 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const apiRequest = async (url, options = {}) => {
   try {
+    // Get user token from localStorage
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const headers = {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    };
+    
+    // Add authorization header if token exists
+    if (user.token) {
+      headers.Authorization = `Bearer ${user.token}`;
+    }
+    
     const response = await fetch(`${API_BASE_URL}${url}`, {
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers,
       ...options,
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ message: 'An unknown error occurred' }));
+      
+      // If unauthorized, clear stored user data
+      if (response.status === 401) {
+        localStorage.removeItem('user');
+        // Optionally redirect to login
+        if (window.location.pathname !== '/') {
+          window.location.href = '/';
+        }
+      }
+      
       throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
     }
 
