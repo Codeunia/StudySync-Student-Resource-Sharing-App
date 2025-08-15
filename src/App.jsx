@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import Sidebar from './components/Sidebar';
+import BottomNavigation from './components/BottomNavigation';
 import Feed from './pages/Feed';
 import Profile from './pages/Profile';
 import Resources from './pages/Resources';
@@ -12,12 +13,24 @@ import { authAPI } from './utils/api';
 import LoginPage from './pages/LoginPage';
 import './styles/pages.css';
 import './styles/sidebar.css';
+import './styles/bottomNavigation.css';
 import './styles/profile.css';
 
 function App() {
   const [collapsed, setCollapsed] = useState(true);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Handle window resize for responsive design
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const checkCurrentUser = async () => {
@@ -70,10 +83,17 @@ function App() {
         <LoginPage />
       ) : (
         <div className="app-layout">
-          <Sidebar user={user} collapsed={collapsed} setCollapsed={setCollapsed} />
+          {/* Desktop Sidebar */}
+          {!isMobile && (
+            <Sidebar user={user} collapsed={collapsed} setCollapsed={setCollapsed} />
+          )}
+          
           <main
             className="main-area"
-            style={{ marginLeft: `${sidebarWidth}px` }}
+            style={{ 
+              marginLeft: isMobile ? '0' : `${sidebarWidth}px`,
+              marginBottom: isMobile ? '120px' : '0' // Space for bottom nav on mobile
+            }}
           >
             <Routes>
               <Route path="/" element={<Feed user={user} />} />
@@ -82,6 +102,9 @@ function App() {
               <Route path="/profile" element={<Profile user={user} />} />
             </Routes>
           </main>
+          
+          {/* Mobile Bottom Navigation */}
+          {isMobile && <BottomNavigation user={user} />}
         </div>
       )}
     </Router>

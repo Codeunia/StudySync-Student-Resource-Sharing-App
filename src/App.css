@@ -31,6 +31,22 @@
     padding: 30px;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-area {
+        padding: 20px 15px;
+        margin-left: 0 !important;
+        margin-bottom: 120px; /* Space for bottom navigation */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-area {
+        padding: 15px 10px;
+        margin-bottom: 130px; /* Slightly more space on very small screens */
+    }
+}
+
 .sidebar{
     font-family: 'Anta';
 }
