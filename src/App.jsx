@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-
+import LoadingScreen from './components/LoadingScreen';
 import Sidebar from './components/Sidebar';
 import BottomNavigation from './components/BottomNavigation';
 import Feed from './pages/Feed';
@@ -81,7 +81,7 @@ function App() {
 	const sidebarWidth = collapsed ? 60 : 250;
 
 	if (loading) {
-		return <div className="loading-message">Loading Application...</div>;
+		return <LoadingScreen />;
 	}
 
 	return (
